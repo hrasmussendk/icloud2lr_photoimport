@@ -1,5 +1,7 @@
 # Henrik Rasmussen 2017.02.27
-# Move pictures from Apple Photo (iCloud) to Lightroom
+# Moves images from Apple iCloud Photo Library to a directory where Lightroom can autoimport them
+#
+# The script should be run from cron every minute
 
 # Delete empty directory structure from source, last modified more than 1 minute ago
 # PLEASE NOTE: To avoid that find files modifies directory modification time, find directory have to be first
