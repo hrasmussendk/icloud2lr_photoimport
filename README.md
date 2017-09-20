@@ -1,4 +1,4 @@
-# movepict_icloud2lr_autoimport
+# icloud 2 Lightroom photoimport
 Moves images from Apple iCloud photo library to a directory from where Lightroom can import them
 
 Description
