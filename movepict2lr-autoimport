@@ -1,18 +1,26 @@
-# Henrik Rasmussen 2017.02.27
+# Henrik Rasmussen 2018.01.31
+# V1.1
 # Moves images from Apple iCloud Photo Library to a directory where Lightroom can autoimport them
 #
 # The script should be run from cron every minute
 
+. movepict2lr-autoimport.conf
+
+if [ "x${HOMEDIR} = "x" ]
+then
+    exit 1
+fi
+
 # Delete empty directory structure from source, last modified more than 1 minute ago
 # PLEASE NOTE: To avoid that find files modifies directory modification time, find directory have to be first
-ls -1 /users/henrikrasmussen/Pictures/Fotobibliotek.photoslibrary/Masters/* 1>/dev/null 2>&1 && for PICTDIR in `find /users/henrikrasmussen/Pictures/Fotobibliotek.photoslibrary/Masters/* -mtime +30s -type d -empty`
+ls -1 ${HOMEDIR}/Pictures/Fotobibliotek.photoslibrary/Masters/* 1>/dev/null 2>&1 && for PICTDIR in `find ${HOMEDIR}/Pictures/Fotobibliotek.photoslibrary/Masters/* -mtime +30s -type d -empty`
 do
 	rmdir $PICTDIR
 done
 
 # Find all images im Apple Photos (iCloud stream), last modified more than 30 seconds ago
-for PICTFILE in `find /users/henrikrasmussen/Pictures/Fotobibliotek.photoslibrary/Masters -mtime +30s -type f`
+for PICTFILE in `find ${HOMEDIR}/Pictures/Fotobibliotek.photoslibrary/Masters -mtime +30s -type f`
 do
 	# Move the images to Lightroom Auto Import folder
-	mv $PICTFILE /users/henrikrasmussen/Pictures/LightroomAutoImport/
+	mv $PICTFILE ${HOMEDIR}/Pictures/LightroomAutoImport/
 done
